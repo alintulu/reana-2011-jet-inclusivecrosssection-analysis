@@ -1,0 +1,14 @@
+version: 0.3.0
+inputs: 
+  files:
+  - code/settings.h
+  - code/normalizeHistos.C
+  - outputs/output-DATA-1.root 
+  parameters:
+     input: workflow/input.yml
+workflow:
+  type: cwl
+  file: workflow/workflow.cwl
+outputs:
+  files:
+   - outputs/output-DATA-2a.root

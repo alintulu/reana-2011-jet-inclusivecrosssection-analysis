@@ -1,0 +1,9 @@
+settings:
+  class: File
+  path: code/settings.h
+normalize:
+  class: File
+  path: code/normalizeHistos.C
+data_1:
+  class: File
+  path: outputs/output-DATA-1.root
