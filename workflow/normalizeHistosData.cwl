@@ -8,32 +8,32 @@ requirements:
   InitialWorkDirRequirement:
     listing:
       - $(inputs.settings)
-      - $(inputs.combine)
-      - $(inputs.data_2a)
+      - $(inputs.normalize)
+      - $(inputs.data_1)
 
 inputs:
   settings:
     type: File
-  combine:
+  normalize:
+    type: File
+  data_1:
     type: File
   data_type:
     type: string
     default: DATA
-  data_2a:
-    type: File
   outfile:
     type: string
-    default: output-DATA-2b.root
+    default: output-DATA-2a.root
 
 baseCommand: /bin/sh
 
 arguments:
   - prefix: -c
     valueFrom: |
-      root -l -b -q '$(inputs.combine.basename)("$(inputs.data_type)")'
+      root -l -b -q '$(inputs.normalize.basename)("$(inputs.data_type)")' 
 
 outputs:
-  output-DATA-2b:
+  output-DATA-2a:
     type: File
     outputBinding:
       glob: $(inputs.outfile)
