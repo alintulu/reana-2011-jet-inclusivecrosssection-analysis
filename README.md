@@ -48,3 +48,53 @@ This example uses the [ROOT](https://root.cern.ch/) analysis framework with the 
   
     Last step is unfolding of the data. The method used is called d'Agostini ("Baysian" or Richardson-Lucy) unfolding and the code includes a response matrix generation from NLO theory and parameterized JER.
     
+    
+ **3. Compute environment**
+ 
+In order to be able to rerun the analysis even several years in the future, we
+need to "encapsulate the current compute environment", for example to freeze the
+ROOT version our analysis is using. We shall achieve this by preparing a `Docker
+<https://www.docker.com/>`_ container image for our analysis steps.
+
+Some of the analysis steps will run in a pure `ROOT <https://root.cern.ch/>`_
+analysis environment. We can use an already existing container image, for
+example `reana-env-root6 <https://github.com/reanahub/reana-env-root6>`_, for
+these steps.
+
+**4. Analysis workflow**
+
+```
+  +-----------+             +-------+
+  | Fill data |             |Fill MC|   
+  +-----------+             +-------+  
+       |                       |
+       |                       |        
+       v                       v  
+  +---------------+       +------------+
+  | Normalize data|       |Normalize MC|   
+  +---------------+       +------------+  
+       |                       |
+       |                       |        
+       v                       v 
+  +-------------+         +----------+
+  | Combine data|         |Combine MC|   
+  +-------------+         +----------+  
+       |                        |
+       |     +------------+     |        
+       +---> | Theory Data|<--- +
+       |     +------------+     |
+       |      +------------+    |        
+       +--->  |  Theory MC |<---+
+       |      +------------+    |
+       |             |          |
+       v             |          v
+ +--------------+    |   +------------+
+ | Dagostini Data|<--+-->|Dagostini MC|
+ +--------------+        +------------+ 
+       |
+       |
+       v
+ +------------+
+ | Draw plots |
+ +------------+
+```
