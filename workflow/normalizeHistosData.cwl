@@ -3,8 +3,8 @@ class: CommandLineTool
 
 requirements:
   DockerRequirement:
-    dockerPull:
-      clelange/cmssw:9_4_4
+      dockerPull:
+        reanahub/reana-env-root6 
   InitialWorkDirRequirement:
     listing:
       - $(inputs.settings)
@@ -30,7 +30,7 @@ baseCommand: /bin/sh
 arguments:
   - prefix: -c
     valueFrom: |
-      root -l -b -q '$(inputs.normalize.basename)("$(inputs.data_type)")' 
+      root -l -b -q 'normalizeHistos.C("DATA")'
 
 outputs:
   output-DATA-2a:

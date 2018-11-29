@@ -4,9 +4,6 @@ cwlVersion: v1.0
 class: Workflow
 
 requirements:
-  DockerRequirement:
-    dockerPull:
-      clelange/cmssw:9_4_4
   InitialWorkDirRequirement:
     listing:
       - $(inputs.data_1)
@@ -20,7 +17,6 @@ inputs:
     type: File
   normalize:
     type: File
-
 
 outputs:
   output-DATA-2a.root:
