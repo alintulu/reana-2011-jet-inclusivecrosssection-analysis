@@ -30,7 +30,7 @@ baseCommand: /bin/sh
 arguments:
   - prefix: -c
     valueFrom: |
-      root -l -b -q 'normalizeHistos.C("DATA")'
+      root -l -b -q '$(inputs.normalize.basename)("$(inputs.data_type)")'
 
 outputs:
   output-DATA-2a:
