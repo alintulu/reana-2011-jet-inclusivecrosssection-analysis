@@ -53,8 +53,7 @@ This example uses the [ROOT](https://root.cern.ch/) analysis framework with the 
  
 In order to be able to rerun the analysis even several years in the future, we
 need to "encapsulate the current compute environment", for example to freeze the
-ROOT version our analysis is using. We shall achieve this by preparing a [docker]
-(https://www.docker.com/) container image for our analysis steps.
+ROOT version our analysis is using. We shall achieve this by preparing a [docker](https://www.docker.com/) container image for our analysis steps.
 
 The analysis steps will run in a pure [ROOT](https://root.cern.ch/)
 analysis environment. We can use an already existing container image, for
