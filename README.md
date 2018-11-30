@@ -53,31 +53,33 @@ This example uses the [ROOT](https://root.cern.ch/) analysis framework with the 
  
 In order to be able to rerun the analysis even several years in the future, we
 need to "encapsulate the current compute environment", for example to freeze the
-ROOT version our analysis is using. We shall achieve this by preparing a `Docker
-<https://www.docker.com/>`_ container image for our analysis steps.
+ROOT version our analysis is using. We shall achieve this by preparing a [docker]
+(https://www.docker.com/) container image for our analysis steps.
 
-Some of the analysis steps will run in a pure `ROOT <https://root.cern.ch/>`_
+The analysis steps will run in a pure [ROOT](https://root.cern.ch/)
 analysis environment. We can use an already existing container image, for
-example `reana-env-root6 <https://github.com/reanahub/reana-env-root6>`_, for
+example [reana-env-root6](https://github.com/reanahub/reana-env-root6) for
 these steps.
 
 **4. Analysis workflow**
 
+Before calculating the inlcuisve jet crossection a few necessary steps are performed. The flow of the workflow is visualized below. The workflow language used here is [CWL](https://www.commonwl.org/). CWL is a specification for describing analysis workflows and tools in a way that makes them portable and scalable. With the help of CWL we are able to run the first three steps in parallel where after the steps get more entangled. This optimizes the workflow, in comparison to having everything run in a serial manner.
+
 ```
   +-----------+             +-------+
-  | Fill data |             |Fill MC|   
+  | Fill Data |             |Fill MC|   
   +-----------+             +-------+  
        |                       |
        |                       |        
        v                       v  
   +---------------+       +------------+
-  | Normalize data|       |Normalize MC|   
+  | Normalize Data|       |Normalize MC|   
   +---------------+       +------------+  
        |                       |
        |                       |        
        v                       v 
   +-------------+         +----------+
-  | Combine data|         |Combine MC|   
+  | Combine Data|         |Combine MC|   
   +-------------+         +----------+  
        |                        |
        |     +------------+     |        
